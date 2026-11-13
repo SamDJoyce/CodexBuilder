@@ -13,7 +13,7 @@ public enum WargearType {
 		this.type = type;
 	}
 	
-	public Boolean isType(WargearType type) {
+	public boolean isType(WargearType type) {
 		return this == type;
 	}
 	
