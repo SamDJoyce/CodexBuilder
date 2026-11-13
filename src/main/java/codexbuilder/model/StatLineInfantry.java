@@ -1,0 +1,218 @@
+package codexbuilder.model;
+
+import java.util.Objects;
+
+public class StatLineInfantry implements StatLine {
+	private final String type = "infantry";
+	
+	private String name;
+	private int bs;
+	private int ws;
+	private int s;
+	private int t;
+	private int w;
+	private int i;
+	private int a;
+	private int ld;
+	private int sv;
+
+	 
+	public StatLineInfantry(
+			String name, 
+			int ws, 
+			int bs, 
+			int s, 
+			int t, 
+			int w, 
+			int i, 
+			int a, 
+			int ld, 
+			int sv) {
+		this.name = name;
+		this.bs = bs;
+		this.ws = ws;
+		this.s = s;
+		this.t = t;
+		this.w = w;
+		this.i = i;
+		this.a = a;
+		this.ld = ld;
+		this.sv = sv;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+	
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	public String getType() {
+		return type;
+	}
+	
+	@Override
+	public String toString() {
+		return  "WS = " + this.ws + " \n" +
+				"BS = " + this.bs + " \n" +
+				"S = " + this.s + " \n" +
+				"T = " + this.t + " \n" +
+				"W = " + this.w + " \n" +
+				"I = " + this.i + " \n" +
+				"A = " + this.a + " \n" +
+				"LD = " + this.ld + " \n" +
+				"SV = " + this.sv + "+";
+	}
+	
+	public void modify(String stat, int modifier) {
+		if ("ws".equalsIgnoreCase(stat)) {
+			ws += modifier;
+		}
+		if ("bs".equalsIgnoreCase(stat)) {
+			bs += modifier;
+		}
+		if ("s".equalsIgnoreCase(stat)) {
+			s += modifier;
+		}
+		if ("t".equalsIgnoreCase(stat)) {
+			t += modifier;
+		}
+		if ("w".equalsIgnoreCase(stat)) {
+			w += modifier;
+		}
+		if ("i".equalsIgnoreCase(stat)) {
+			i += modifier;
+		}
+		if ("a".equalsIgnoreCase(stat)) {
+			a += modifier;
+		}
+		if ("ld".equalsIgnoreCase(stat)) {
+			ld += modifier;
+		}
+		if ("sv".equalsIgnoreCase(stat)) {
+			sv += modifier;
+		}
+	}
+	
+	// Infantry Stats
+	
+	public int getBs() {
+		return bs;
+	}
+	
+	public void setBs(int bs) {
+		this.bs = bs;
+	}
+	
+	public int getWs() {
+		return ws;
+	}
+
+	public void setWs(int ws) {
+		this.ws = ws;
+	}
+
+	public int getS() {
+		return s;
+	}
+
+	public void setS(int s) {
+		this.s = s;
+	}
+
+	public int getT() {
+		return t;
+	}
+
+	public void setT(int t) {
+		this.t = t;
+	}
+
+	public int getW() {
+		return w;
+	}
+
+	public void setW(int w) {
+		this.w = w;
+	}
+
+	public int getI() {
+		return i;
+	}
+
+	public void setI(int i) {
+		this.i = i;
+	}
+
+	public int getA() {
+		return a;
+	}
+
+	public void setA(int a) {
+		this.a = a;
+	}
+
+	public int getLd() {
+		return ld;
+	}
+
+	public void setLd(int ld) {
+		this.ld = ld;
+	}
+
+	public int getSv() {
+		return sv;
+	}
+
+	public void setSv(int sv) {
+		this.sv = sv;
+	}
+	
+	// Other Stats not used for Infantry
+	public int getFront() {
+		return 0;
+	}
+	
+	public void setFront(int front) {
+		return;
+	}
+	
+	public int getSide() {
+		return 0;
+	}
+	
+	public void setSide(int side) {
+		return;
+	}
+	
+	public int getRear() {
+		return 0;
+	}
+	
+	public void setRear(int rear) {
+		return;
+	}
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (!(obj instanceof StatLineInfantry other)) return false;
+		return Objects.equals(name, other.name)
+			&& Objects.equals(ws,   other.ws)
+			&& Objects.equals(bs,   other.bs)
+			&& Objects.equals(s,    other.s)
+			&& Objects.equals(t,    other.t)
+			&& Objects.equals(w, 	other.w)
+			&& Objects.equals(i, 	other.i)
+			&& Objects.equals(a, 	other.a)
+			&& Objects.equals(ld, 	other.ld)
+			&& Objects.equals(sv, 	other.sv);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(
+				name, ws, bs, s, t, w, i, a, ld, sv);
+	}
+}

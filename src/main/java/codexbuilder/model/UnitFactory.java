@@ -1,0 +1,95 @@
+package codexbuilder.model;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import codexbuilder.model.options.OptionGroup;
+
+public class UnitFactory {
+	
+	private static final Map<String, UnitDescription> registry = new HashMap<>();
+	
+	public static UnitDescription createDescription(			
+			String name, 
+			int minSize, 
+			int maxSize, 
+			UnitRole role,
+			Set<OptionGroup> options,
+			List<ModelDescription> models,
+			ModelDescription modelToAdd) {
+		return registry.computeIfAbsent(name,
+	            key -> new UnitDescription(
+				name,
+				minSize,
+				maxSize,
+				role,
+				options,
+				models,
+				modelToAdd));
+	}
+	
+	public static UnitDescription createDescription(			
+			String name, 
+			int minSize, 
+			int maxSize, 
+			UnitRole role) {
+		return registry.computeIfAbsent(name,
+	            key -> new UnitDescription(
+				name,
+				minSize,
+				maxSize,
+				role));
+	}
+	
+	public static UnitDescription createDescription(			
+			String name, 
+			int minSize, 
+			int maxSize, 
+			UnitRole role,
+			Set<OptionGroup> options,
+			ModelDescription modelToAdd) {
+		return registry.computeIfAbsent(name,
+	            key -> new UnitDescription(
+				name,
+				minSize,
+				maxSize,
+				role,
+				options,
+				new ArrayList<ModelDescription>(),
+				modelToAdd));
+	}
+	
+	public static UnitDescription get(String name) {
+		return registry.get(name);
+	}
+	
+	public static List<UnitDescription> getAll(List<String> names){
+		List<UnitDescription> units = new ArrayList<>();
+		
+		for (String name : names) {
+			units.add(get(name));
+		}
+		
+		return units;
+	}
+	
+	public static Map<String, UnitDescription> getRegistry(){
+		return registry;
+	}
+	
+	public static Set<UnitDescription> getAllUnits(){
+		Set<UnitDescription> units = new HashSet<>();
+		for (UnitDescription u : registry.values()) {
+			units.add(u);
+		}
+		return units;
+	}
+	
+	public static void clearRegistry() {
+		registry.clear();
+	}
+}
