@@ -1,1 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox id="wargear-pane" prefHeight="400.0" prefWidth="640.0" spacing="12.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codexbuilder.controller.WargearController">
+
+    <padding>
+        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+    </padding>
+
+    <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
+
+        <items>
+
+            <!-- Existing Wargear -->
+            <VBox minWidth="160.0" prefWidth="200.0" spacing="8.0">
+
+                <Label id="existing-wargear-label" style="-fx-font-weight: bold;" text="Existing Wargear" />
+
+                <ListView id="existing-wargear-list" fx:id="wargearListView" VBox.vgrow="ALWAYS" />
+
+            </VBox>
+
+            <!-- Wargear Details -->
+            <VBox minWidth="250.0" spacing="12.0">
+
+                <Label id="wargear-title-label" style="-fx-font-size: 16px;                               -fx-font-weight: bold;" text="Wargear Details" />
+
+                <Separator />
+
+                <GridPane hgap="12.0" vgap="12.0">
+
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="80.0" />
+                        <ColumnConstraints hgrow="ALWAYS" />
+                    </columnConstraints>
+
+                    <Label id="wargear-name-label" text="Name" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+
+                    <TextField id="wargear-name-field" fx:id="nameField" promptText="Enter wargear name" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                    <Label id="wargear-type-label" text="Type" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+
+                    <ComboBox id="wargear-type-dropdown" fx:id="typeComboBox" maxWidth="Infinity" promptText="Select a type" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               <rowConstraints>
+                  <RowConstraints />
+                  <RowConstraints />
+               </rowConstraints>
+
+                </GridPane>
+
+                <Label fx:id="errorLabel" textFill="FIREBRICK" wrapText="true" />
+
+                <Region VBox.vgrow="ALWAYS" />
+
+                <HBox spacing="8.0">
+
+                    <Button id="new-wargear-button" onAction="#handleNew" text="New" />
+
+                    <Button id="save-wargear-button" defaultButton="true" onAction="#handleSave" text="Save Wargear" />
+
+                    <Button id="delete-wargear-button" fx:id="deleteButton" onAction="#handleDelete" text="Delete" />
+
+                </HBox>
+
+            </VBox>
+
+        </items>
+
+    </SplitPane>
+
+</VBox>
