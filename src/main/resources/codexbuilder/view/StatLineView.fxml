@@ -1,1 +1,241 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox
+    id="statline-pane"
+    prefHeight="500.0"
+    prefWidth="760.0"
+    spacing="12.0"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="codexbuilder.controller.StatLineController">
+
+    <padding>
+        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+    </padding>
+
+    <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
+        <items>
+
+            <!-- Existing StatLines -->
+            <VBox minWidth="160.0" prefWidth="200.0" spacing="8.0">
+                <Label
+                    id="existing-statlines-label"
+                    style="-fx-font-weight: bold;"
+                    text="Existing StatLines"/>
+
+                <ListView
+                    id="existing-statlines-listview"
+                    fx:id="existingStatLinesListView"
+                    VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- StatLine Details -->
+            <VBox minWidth="300.0" spacing="12.0">
+
+                <Label
+                    id="statline-title-label"
+                    style="-fx-font-size: 16px; -fx-font-weight: bold;"
+                    text="StatLine Details"/>
+
+                <Separator/>
+
+                <GridPane hgap="12.0" vgap="12.0">
+                    <columnConstraints>
+                        <ColumnConstraints minWidth="100.0"/>
+                        <ColumnConstraints hgrow="ALWAYS"/>
+                    </columnConstraints>
+
+                    <Label
+                        text="Name"
+                        GridPane.columnIndex="0"
+                        GridPane.rowIndex="0"/>
+
+                    <TextField
+                        id="statline-name-field"
+                        fx:id="statLineNameField"
+                        promptText="Enter stat line name"
+                        GridPane.columnIndex="1"
+                        GridPane.rowIndex="0"/>
+
+                    <Label
+                        text="New StatLine Type"
+                        GridPane.columnIndex="0"
+                        GridPane.rowIndex="1"/>
+
+                    <ComboBox
+                        id="statline-type-combobox"
+                        fx:id="statLineTypeComboBox"
+                        maxWidth="Infinity"
+                        promptText="Select a type"
+                        GridPane.columnIndex="1"
+                        GridPane.rowIndex="1"/>
+                </GridPane>
+
+                <Separator/>
+
+                <Label
+                    style="-fx-font-weight: bold;"
+                    text="Characteristics"/>
+
+                <!-- Infantry Characteristics -->
+                <VBox
+                    fx:id="infantryCharacteristics"
+                    spacing="8.0">
+
+                    <Label
+                        style="-fx-font-weight: bold;"
+                        text="Infantry"/>
+
+                    <GridPane hgap="8.0" vgap="8.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="WS" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="BS" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="S" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                        <TextField fx:id="wsField" promptText="WS" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="bsField" promptText="BS" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField fx:id="sField" promptText="S" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                        <Label text="T" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="W" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label text="I" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+                        <TextField fx:id="tField" promptText="T" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="wField" promptText="W" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <TextField fx:id="iField" promptText="I" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+                        <Label text="A" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label text="Ld" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <Label text="Sv" GridPane.columnIndex="2" GridPane.rowIndex="4"/>
+
+                        <TextField fx:id="aField" promptText="A" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextField fx:id="ldField" promptText="Ld" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <TextField fx:id="svField" promptText="Sv" GridPane.columnIndex="2" GridPane.rowIndex="5"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- Vehicle Characteristics -->
+                <VBox
+                    fx:id="vehicleCharacteristics"
+                    spacing="8.0"
+                    visible="false"
+                    managed="false">
+
+                    <Label
+                        style="-fx-font-weight: bold;"
+                        text="Vehicle"/>
+
+                    <GridPane hgap="8.0" vgap="8.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="BS" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="Front" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="Side" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                        <TextField fx:id="vehicleBsField" promptText="BS" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="frontField" promptText="Front" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField fx:id="sideField" promptText="Side" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                        <Label text="Rear" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <TextField fx:id="rearField" promptText="Rear" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- Walker Characteristics -->
+                <VBox
+                    fx:id="walkerCharacteristics"
+                    spacing="8.0"
+                    visible="false"
+                    managed="false">
+
+                    <Label
+                        style="-fx-font-weight: bold;"
+                        text="Walker"/>
+
+                    <GridPane hgap="8.0" vgap="8.0">
+                        <columnConstraints>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                            <ColumnConstraints hgrow="ALWAYS"/>
+                        </columnConstraints>
+
+                        <Label text="WS" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                        <Label text="BS" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="S" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+
+                        <TextField fx:id="walkerWsField" promptText="WS" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                        <TextField fx:id="walkerBsField" promptText="BS" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <TextField fx:id="walkerSField" promptText="S" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+
+                        <Label text="I" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                        <Label text="A" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label text="Front" GridPane.columnIndex="2" GridPane.rowIndex="2"/>
+
+                        <TextField fx:id="walkerIField" promptText="I" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+                        <TextField fx:id="walkerAField" promptText="A" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <TextField fx:id="walkerFrontField" promptText="Front" GridPane.columnIndex="2" GridPane.rowIndex="3"/>
+
+                        <Label text="Side" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+                        <Label text="Rear" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+
+                        <TextField fx:id="walkerSideField" promptText="Side" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+                        <TextField fx:id="walkerRearField" promptText="Rear" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                    </GridPane>
+                </VBox>
+
+                <Label
+                    id="error-label"
+                    fx:id="errorLabel"
+                    textFill="FIREBRICK"
+                    wrapText="true"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <HBox spacing="8.0">
+                    <Button
+                        id="new-statline-button"
+                        fx:id="newStatLineButton"
+                        onAction="#handleNew"
+                        text="New"/>
+
+                    <Button
+                        id="save-statline-button"
+                        fx:id="saveStatLineButton"
+                        defaultButton="true"
+                        onAction="#handleSave"
+                        text="Save StatLine"/>
+
+                    <Button
+                        id="delete-statline-button"
+                        fx:id="deleteStatLineButton"
+                        onAction="#handleDelete"
+                        text="Delete"/>
+                </HBox>
+
+            </VBox>
+        </items>
+    </SplitPane>
+</VBox>
