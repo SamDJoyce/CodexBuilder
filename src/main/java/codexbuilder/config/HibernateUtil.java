@@ -3,6 +3,9 @@ package codexbuilder.config;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import codexbuilder.model.StatLineInfantry;
+import codexbuilder.model.StatLineVehicle;
+import codexbuilder.model.StatLineWalker;
 import codexbuilder.model.WargearDescription;
 
 public class HibernateUtil {
@@ -14,6 +17,9 @@ public class HibernateUtil {
         try {
             return new Configuration()
                 .addAnnotatedClass(WargearDescription.class)
+                .addAnnotatedClass(StatLineInfantry.class)
+                .addAnnotatedClass(StatLineVehicle.class)
+                .addAnnotatedClass(StatLineWalker.class)
                 .buildSessionFactory();
 
         } catch (Throwable ex) {

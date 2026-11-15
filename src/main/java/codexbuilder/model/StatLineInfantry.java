@@ -2,21 +2,39 @@ package codexbuilder.model;
 
 import java.util.Objects;
 
-public class StatLineInfantry implements StatLine {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("infantry")
+public class StatLineInfantry extends AbstractStatLine {
+
 	private final String type = "infantry";
 	
+	@Column(nullable = false)
 	private String name;
+	@Column
 	private int bs;
+	@Column
 	private int ws;
+	@Column
 	private int s;
+	@Column
 	private int t;
+	@Column
 	private int w;
+	@Column
 	private int i;
+	@Column
 	private int a;
+	@Column
 	private int ld;
+	@Column
 	private int sv;
 
-	 
+	protected StatLineInfantry() {}
+	
 	public StatLineInfantry(
 			String name, 
 			int ws, 
@@ -39,7 +57,7 @@ public class StatLineInfantry implements StatLine {
 		this.ld = ld;
 		this.sv = sv;
 	}
-
+	
 	public String getName() {
 		return this.name;
 	}

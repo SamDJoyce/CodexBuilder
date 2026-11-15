@@ -18,6 +18,7 @@ public class MainController {
     @FXML
     private void initialize() {
        initializeWargear();
+       initializeStatLines();
        //initializeModels();
        //initializeUnits();
        //initializeGroups();
@@ -38,6 +39,10 @@ public class MainController {
 
         // Connect the ViewModel to the Wargear controller.
         wargearViewController.setViewModel(wargearViewModel);
+    }
+    
+    private void initializeStatLines() {
+    	// TODO
     }
     
     private void initializeModels() {

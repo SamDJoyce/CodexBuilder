@@ -39,46 +39,28 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox 
-	prefHeight="400.0" 
-	prefWidth="640.0" 
-	xmlns="http://javafx.com/javafx/21" 
-	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="codexbuilder.controller.MainController">
+<VBox prefHeight="400.0" prefWidth="640.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="codexbuilder.controller.MainController">
   <children>
-    <AnchorPane 
-    	maxHeight="-1.0" 
-    	maxWidth="-1.0" 
-    	prefHeight="-1.0" 
-    	prefWidth="-1.0" 
-    	VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
-        <Label 
-        	alignment="CENTER" 
-        	layoutX="155.0" 
-        	layoutY="177.0" 
-        	style="&#10;" 
-        	text="Drag components from Library here…" 
-        	textAlignment="CENTER" 
-        	textFill="#9f9f9f"
-        	 wrapText="false">
+        <Label alignment="CENTER" layoutX="155.0" layoutY="177.0" style="&#10;" text="Drag components from Library here…" textAlignment="CENTER" textFill="#9f9f9f" wrapText="false">
           <font>
             <Font size="18.0" />
           </font>
         </Label>
-            <TabPane 
-            	layoutY="4.0" 
-            	prefHeight="400.0" 
-            	prefWidth="640.0" 
-            	tabClosingPolicy="UNAVAILABLE">
+            <TabPane layoutY="4.0" prefHeight="400.0" prefWidth="640.0" tabClosingPolicy="UNAVAILABLE">
               <tabs>
               <!-- Wargear Tab -->
 	            <Tab text="Wargear">
 		            <content>
-				        <fx:include fx:id="wargearView"
-				                    source="WargearView.fxml"/>
+				        <fx:include fx:id="wargearView" source="WargearView.fxml" />
 	    			</content>
     			</Tab>
+                  <Tab text="StatLines">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                  </Tab>
     			<!-- Models Tab -->
 	            <Tab text="Models">
 	            	<content>

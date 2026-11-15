@@ -2,15 +2,31 @@ package codexbuilder.model;
 
 import java.util.Objects;
 
-public class StatLineVehicle implements StatLine {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
+@Entity
+@DiscriminatorValue("vehicle")
+public class StatLineVehicle extends AbstractStatLine {
+	
 	private final static String type = "vehicle";
 	
+	@Column(nullable = false)
 	private String name;
+	@Column
 	private int bs;
+	@Column
 	private int front;
+	@Column
 	private int side;
+	@Column
 	private int rear;
+	
+	protected StatLineVehicle() {};
 	
 	public StatLineVehicle( 
 			String name, 
@@ -41,6 +57,7 @@ public class StatLineVehicle implements StatLine {
 		}
 	}
 	
+	// Getters and Setters
 	public String getType() {
 		return type;
 	}

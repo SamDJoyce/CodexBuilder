@@ -1,8 +1,5 @@
 package codexbuilder.model;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Handles statline creation
  */
@@ -11,8 +8,6 @@ public class StatLineFactory {
 	private static final String INFANTRY = "infantry";
 	private static final String VEHICLE = "vehicle";
 	private static final String WALKER = "walker";
-	
-	private static final Map<String, StatLine> registry = new HashMap<>();
 	
 	public static StatLine copy(StatLine stats) {
 		if (INFANTRY.equalsIgnoreCase(stats.getType())) {
@@ -42,8 +37,8 @@ public class StatLineFactory {
 		if (WALKER.equalsIgnoreCase(stats.getType())) {
 			return new StatLineWalker(
 					stats.getName(),
-					stats.getBs(),
 					stats.getWs(),
+					stats.getBs(),
 					stats.getS(),
 					stats.getI(),
 					stats.getA(),
@@ -54,6 +49,22 @@ public class StatLineFactory {
 		}
 		return new StatLineInfantry("",0,0,0,0,0,0,0,0,0);
 	}
+	
+	/**
+	 * Create a blank statline object for Hibernate
+	 * @param type 
+	 * @return	an empty statline
+	 */
+    public static StatLine createStatLine(String type) {
+
+        return switch (type) {
+            case INFANTRY -> new StatLineInfantry();
+            case VEHICLE -> new StatLineVehicle();
+            case WALKER -> new StatLineWalker();
+            default -> throw new IllegalArgumentException(
+                    "Unknown StatLine type: " + type);
+        };
+    }
 	
 	/**
 	 * Create a standard infantry statline
@@ -81,9 +92,9 @@ public class StatLineFactory {
 			int a, 
 			int ld, 
 			int sv) {
-		return  registry.computeIfAbsent(name,
-	            key -> new StatLineInfantry(name,ws,bs,s,t,w,i,a,ld,sv));
+		return  new StatLineInfantry(name,ws,bs,s,t,w,i,a,ld,sv);
 	}
+
 
 	/**
 	 * Create a vehicle statline
@@ -101,8 +112,7 @@ public class StatLineFactory {
 			int front,
 			int side,
 			int rear) {
-		return registry.computeIfAbsent(name,
-	            key -> new StatLineVehicle(name, bs, front, side, rear));
+		return new StatLineVehicle(name, bs, front, side, rear);
 	}
 
 	/**
@@ -130,25 +140,7 @@ public class StatLineFactory {
 			int front,
 			int side,
 			int rear) {
-		return registry.computeIfAbsent(name,
-	            key -> new StatLineWalker(name, bs, ws, s, i, a, front, side, rear));
+		return new StatLineWalker(name, bs, ws, s, i, a, front, side, rear);
 	}
-	
-	/**
-	 * 
-	 * 
-	 * @param name
-	 * @return
-	 */
-	public static StatLine get(String name) {
-		return registry.get(name);
-	}
-	
-	public static Map<String, StatLine> getRegistry(){
-		return registry;
-	}
-	
-	public static void clearRegistry() {
-		registry.clear();
-	}
+
 }

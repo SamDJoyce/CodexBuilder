@@ -2,19 +2,36 @@ package codexbuilder.model;
 
 import java.util.Objects;
 
-public class StatLineWalker implements StatLine {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+@Entity
+@DiscriminatorValue("walker")
+public class StatLineWalker extends AbstractStatLine {
 
 	private static final String type = "walker";
 	
+	@Column(nullable = false)
 	private String name;
+	@Column
 	private int bs;
+	@Column
 	private int ws;
+	@Column
 	private int s;
+	@Column
 	private int i;
+	@Column
 	private int a;
+	@Column
 	private int front;
+	@Column
 	private int side;
+	@Column
 	private int rear;
+	
+	protected StatLineWalker() {};
 	
 	public StatLineWalker(
 			String name, 
