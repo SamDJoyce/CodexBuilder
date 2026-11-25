@@ -1,11 +1,23 @@
 package codexbuilder.model.requirements;
 
 import codexbuilder.model.UnitType;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
+@Entity
+@DiscriminatorValue("must_have_type")
 public class MustHaveTypeReq{
 
-	private final String name;
+	@Column(nullable = false)
+	private String name;
+	@Enumerated(EnumType.STRING)
+	@Column
 	private UnitType requiredType;
+	
+	public MustHaveTypeReq() {};
 	
 	public MustHaveTypeReq(String name, UnitType requiredType) {
 		this.name = name;

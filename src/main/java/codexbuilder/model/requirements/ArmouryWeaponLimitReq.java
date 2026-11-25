@@ -1,12 +1,17 @@
 package codexbuilder.model.requirements;
 
-public class ArmouryWeaponLimitReq {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("armoury_weapon_limit")
+
+public class ArmouryWeaponLimitReq extends AbstractRequirement {
+	@Column(nullable = false)
+	private String name;
 	
-	private final static int MAX_WEAPON_COUNT = 2;
-	private final static int MAX_TWO_HANDED   = 1;
-	
-	private final String name;
+	public ArmouryWeaponLimitReq() {};
 	
 	public ArmouryWeaponLimitReq(String name) {
 		this.name = name;

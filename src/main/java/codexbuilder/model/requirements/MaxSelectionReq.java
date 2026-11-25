@@ -1,10 +1,21 @@
 package codexbuilder.model.requirements;
 
-public class MaxSelectionReq{
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
-	private final String name;
+@Entity
+@DiscriminatorValue("max_selection")
+public class MaxSelectionReq extends AbstractRequirement {
+
+	@Column(nullable = false)
+	private String name;
+	@Column
 	private int maxSelection;
+	@Column
 	private String message;
+	
+	public MaxSelectionReq() {};
 	
 	public MaxSelectionReq(
 			String name,

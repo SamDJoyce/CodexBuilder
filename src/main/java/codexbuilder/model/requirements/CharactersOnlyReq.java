@@ -1,9 +1,18 @@
 package codexbuilder.model.requirements;
 
-public class CharactersOnlyReq {
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
+@Entity
+@DiscriminatorValue("characters_only")
+public class CharactersOnlyReq extends AbstractRequirement {
+	
+	@Column(nullable = false)
 	private String name;
 
+	public CharactersOnlyReq() {}
+	
 	public CharactersOnlyReq(String name) {
 		this.name = name;
 	}

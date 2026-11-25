@@ -10,6 +10,8 @@ import jakarta.persistence.DiscriminatorColumn;
 /**
  * This abstract class allows Hibernate to map sub-classes
  * and store them all in one table.
+ * 
+ * @author Sam Joyce
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -22,6 +24,10 @@ public abstract class AbstractStatLine implements StatLine {
 
     protected AbstractStatLine() {}
 
+    public void setId(Long id) {
+    	this.id = id;
+    }
+    
     public Long getId() {
         return id;
     }

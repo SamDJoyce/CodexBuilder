@@ -1,13 +1,27 @@
 package codexbuilder.model.requirements;
 
 import codexbuilder.model.ModelDescription;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
-public class MaxPerModelCountReq{
+@Entity
+@DiscriminatorValue("max_per_model_count")
+public class MaxPerModelCountReq extends AbstractRequirement {
 
-	private final String name;
-	private final int rate;
+	@Column(nullable = false)
+	private String name;
+	@Column
+	private int rate;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "count_model_id")
 	private ModelDescription model;
-	private String message;
+	
+	public MaxPerModelCountReq() {};
 	
 	public MaxPerModelCountReq(
 			String name, int rate) {

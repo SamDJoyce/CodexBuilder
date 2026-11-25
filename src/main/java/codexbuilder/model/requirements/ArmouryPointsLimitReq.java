@@ -8,9 +8,11 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue("armoury_points_limit")
 public class ArmouryPointsLimitReq extends AbstractRequirement{
 	@Column(nullable = false)
-	private final String name;
+	private String name;
 	@Column
-	private final int limit;
+	private int limit;
+	
+	public ArmouryPointsLimitReq() {};
 	
 	public ArmouryPointsLimitReq(String name, int limit) {
 		this.name = name;

@@ -4,10 +4,12 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import codexbuilder.model.requirements.AbstractRequirement;
+
 public class OptionGroup {
 	private String name;
 	private Set<OptionChoice> choices;
-	private Set<String> requirements;
+	private Set<AbstractRequirement> requirements;
 	private int minSelections;
 	private int maxSelections;
 	
@@ -25,7 +27,7 @@ public class OptionGroup {
 	public OptionGroup(
 			String name,
 			Set<OptionChoice> choices,
-			Set<String> requirements,
+			Set<AbstractRequirement> requirements,
 			int minSelections,
 			int maxSelections) {
 		this.name 		   = name;
@@ -49,7 +51,7 @@ public class OptionGroup {
 		return choices.contains(choice);
 	}
 
-	public Set<String> getRequirements() {
+	public Set<AbstractRequirement> getRequirements() {
 		return requirements;
 	}
 	
@@ -61,11 +63,11 @@ public class OptionGroup {
 		return maxSelections;
 	}
 
-	public void setRequirements(Set<String> requirements) {
+	public void setRequirements(Set<AbstractRequirement> requirements) {
 		this.requirements = requirements;
 	}
 
-	public static OptionGroup get(
+	public static OptionGroup create(
 			String name,
 			Set<OptionChoice> choices,
 			int minSelections,
@@ -73,15 +75,15 @@ public class OptionGroup {
 		return new OptionGroup(
 					name,
 					choices,
-					new HashSet<String>(),
+					new HashSet<AbstractRequirement>(),
 					minSelections,
 					maxSelections);
 	}
 	
-	public static OptionGroup get(
+	public static OptionGroup create(
 			String name,
 			Set<OptionChoice> choices,
-			Set<String> requirements,
+			Set<AbstractRequirement> requirements,
 			int minSelections,
 			int maxSelections) {
 		return new OptionGroup(

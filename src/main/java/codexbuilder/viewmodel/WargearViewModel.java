@@ -131,18 +131,13 @@ public class WargearViewModel {
 
     // Delete the currently selected wargear record
     public void deleteWargear() {
-
         WargearDescription wargear = selectedWargear.get();
-
         if (wargear == null) {
             return;
         }
-
         repository.delete(wargear);
-
         wargearItems.removeIf(item ->
                 item.getId().equals(wargear.getId()));
-
         newWargear();
     }
 
