@@ -15,38 +15,46 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 public class StatLineViewModel {
-
+	// Repository
     private final StatLineRepository statLineRepository;
 
+    // List of StatLines
     private final ObservableList<AbstractStatLine> statLines =
             FXCollections.observableArrayList();
 
+    // StatLine Properties
     private final ObjectProperty<AbstractStatLine> selectedStatLine =
-            new SimpleObjectProperty<>();
+            		new SimpleObjectProperty<>();
 
     private final StringProperty name = new SimpleStringProperty("");
     private final StringProperty type = new SimpleStringProperty("");
     private final StringProperty validationMessage =
-            new SimpleStringProperty("");
+            		new SimpleStringProperty("");
 
     private final IntegerProperty ws = new SimpleIntegerProperty();
     private final IntegerProperty bs = new SimpleIntegerProperty();
-    private final IntegerProperty s = new SimpleIntegerProperty();
-    private final IntegerProperty t = new SimpleIntegerProperty();
-    private final IntegerProperty w = new SimpleIntegerProperty();
-    private final IntegerProperty i = new SimpleIntegerProperty();
-    private final IntegerProperty a = new SimpleIntegerProperty();
+    private final IntegerProperty s  = new SimpleIntegerProperty();
+    private final IntegerProperty t  = new SimpleIntegerProperty();
+    private final IntegerProperty w  = new SimpleIntegerProperty();
+    private final IntegerProperty i  = new SimpleIntegerProperty();
+    private final IntegerProperty a  = new SimpleIntegerProperty();
     private final IntegerProperty ld = new SimpleIntegerProperty();
     private final IntegerProperty sv = new SimpleIntegerProperty();
     private final IntegerProperty front = new SimpleIntegerProperty();
-    private final IntegerProperty side = new SimpleIntegerProperty();
-    private final IntegerProperty rear = new SimpleIntegerProperty();
+    private final IntegerProperty side  = new SimpleIntegerProperty();
+    private final IntegerProperty rear  = new SimpleIntegerProperty();
 
+    // Constructor
     public StatLineViewModel(StatLineRepository statLineRepository) {
         this.statLineRepository = statLineRepository;
         loadStatLines();
     }
 
+    // Methods
+    
+    /**
+     * Load all StatLines from the StatLine Repository
+     */
     public void loadStatLines() {
         statLines.setAll(statLineRepository.findAll());
     }
@@ -79,6 +87,10 @@ public class StatLineViewModel {
         rear.set(statLine.getRear());
     }
 
+    /**
+     * Instance a new StatLine based on the user selected type.
+     * @param type
+     */
     public void newStatLine(String type) {
 
         if (type == null) {
@@ -98,8 +110,8 @@ public class StatLineViewModel {
                 );
         }
 
-        StatLine newStatLine = StatLineFactory.createStatLine(
-                type.toLowerCase()
+        StatLine newStatLine = StatLineFactory
+        		.createStatLine(type.toLowerCase()
         );
 
         selectStatLine((AbstractStatLine) newStatLine);
@@ -139,10 +151,12 @@ public class StatLineViewModel {
         }
 
         selectStatLine(savedStatLine);
-
         return true;
     }
 
+    /**
+     * Remove a statline from the StatLine Repository
+     */
     public void deleteStatLine() {
 
         AbstractStatLine statLine = selectedStatLine.get();
@@ -180,6 +194,9 @@ public class StatLineViewModel {
         statLine.setRear(rear.get());
     }
 
+    /**
+     * Clear all StatLine properties
+     */
     private void clearFields() {
 
         name.set("");
