@@ -11,8 +11,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 /**
- * This abstract class allows hibernate to map sub-classes
- * and store them all in one table.
+ * This abstract class allows hibernate to map Requirement 
+ * sub-classes and store them all in one table.
  * 
  * @author Sam Joyce
  */

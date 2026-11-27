@@ -34,8 +34,8 @@ public class EffectFactory {
 	 */
 	public static ReplaceModelEffect replaceModel(
 			String name,
-			String newModel, 
-			String oldModel) {
+			ModelDescription newModel, 
+			ModelDescription oldModel) {
 		return new ReplaceModelEffect(name, newModel, oldModel);
 	}
 	
