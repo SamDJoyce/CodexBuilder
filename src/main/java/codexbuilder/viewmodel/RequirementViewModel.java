@@ -87,6 +87,11 @@ public class RequirementViewModel {
 		maximum.set(req.getMaximum());
 		minimum.set(req.getMinimum());
 		limit.set(req.getLimit());
+		
+        blockingGear.set(req.getBlockingGear());
+        requiredGear.set(req.getRequiredGear());
+        model.set(req.getModel());
+        requiredType.set(req.getRequiredType());
 	}
 	
 	/**
@@ -130,7 +135,7 @@ public class RequirementViewModel {
 	public boolean saveRequirement() {
 		// Validate there is a Requirement present
 		if (selectedReq.get() == null) {
-            validationMessage.set("Select or create a stat line first.");
+            validationMessage.set("Select or create a Requirement first.");
             return false;
         }
         // Validate a name is present
@@ -142,6 +147,8 @@ public class RequirementViewModel {
         AbstractRequirement req = selectedReq.get();
         applyFields(req);
         AbstractRequirement savedReq = reqRepo.save(req);
+        
+        selectRequirement(savedReq);
         
         int existingIndex = -1;
         
@@ -163,7 +170,7 @@ public class RequirementViewModel {
         	requirements.add(savedReq);
         }
         
-        selectRequirement(savedReq);
+        
         return true;
 	}
 	
@@ -201,6 +208,7 @@ public class RequirementViewModel {
 		req.setMaxSelection(maxSelection.get());
 		req.setMaximum(maximum.get());
 		req.setMinimum(minimum.get());
+		req.setModel(model.get());
 		req.setLimit(limit.get());
 		req.setBlockingGear(blockingGear.get());
 		req.setRequiredGear(requiredGear.get());
@@ -223,6 +231,7 @@ public class RequirementViewModel {
 		requiredGear.set(null);
 		model.set(null);
 		requiredType.set(null);
+		type.set(null);
 	}
 	
 	// Getters
@@ -275,4 +284,11 @@ public class RequirementViewModel {
     	return requiredType;
     }
     
+    public StringProperty typeProperty() {
+        return type;
+    }
+
+    public StringProperty validationMessageProperty() {
+        return validationMessage;
+    }
 }

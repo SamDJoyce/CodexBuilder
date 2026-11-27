@@ -6,9 +6,7 @@ import codexbuilder.model.WargearDescription;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Transient;
 
 @Entity
 @DiscriminatorValue("max_per_model_count")
@@ -20,8 +18,9 @@ public class MaxPerModelCountReq extends AbstractRequirement {
 	@Column
 	private int rate;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "count_model_id")
+//	@ManyToOne(fetch = FetchType.LAZY)
+//	@JoinColumn(name = "count_model_id")
+	@Transient
 	private ModelDescription model;
 	
 	private final String type = "max_per_model_count";

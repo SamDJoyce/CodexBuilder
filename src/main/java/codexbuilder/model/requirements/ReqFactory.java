@@ -10,6 +10,8 @@ public class ReqFactory {
 		switch (type.toLowerCase()) {
 	    	case "armoury_weapon_limit":
 	    		return new ArmouryWeaponLimitReq();
+	    	case "armoury_points_limit":
+	    		return new ArmouryPointsLimitReq();
 	    	case "cannot_have_gear":
 	    		return new CannotHaveGearReq();
 	    	case "characters_only":
@@ -23,12 +25,12 @@ public class ReqFactory {
 	    	case "must_have_gear":
 	    		return new MustHaveGearReq();
 	    	case "must_have_type":
-	    		return new MustHaveGearReq();
+	    		return new MustHaveTypeReq();
 	    	case "must_start_with_gear":
 	    		return new MustStartWithGearReq();
 	    	 default:
 	             throw new IllegalArgumentException(
-	                     "Unsupported Requirement type: " + type
+	                     "Requirement type unsupported by factory: " + type
 	             );
 		}
 	}

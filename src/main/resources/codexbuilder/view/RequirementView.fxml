@@ -1,1 +1,247 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox
+    id="requirement-pane"
+    prefHeight="500.0"
+    prefWidth="760.0"
+    spacing="12.0"
+    xmlns="http://javafx.com/javafx/21"
+    xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="codexbuilder.controller.RequirementController">
+
+    <padding>
+        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0"/>
+    </padding>
+
+    <SplitPane dividerPositions="0.3" VBox.vgrow="ALWAYS">
+        <items>
+
+            <!-- Existing Requirements -->
+            <VBox minWidth="160.0" prefWidth="200.0" spacing="8.0">
+                <Label
+                    id="existing-requirements-label"
+                    style="-fx-font-weight: bold;"
+                    text="Existing Requirements"/>
+
+                <ListView
+                    id="existing-requirements-listview"
+                    fx:id="existingRequirementsListView"
+                    VBox.vgrow="ALWAYS"/>
+            </VBox>
+
+            <!-- Requirement Details -->
+            <VBox minWidth="300.0" spacing="12.0">
+                <Label
+                    id="requirement-title-label"
+                    style="-fx-font-size: 16px; -fx-font-weight: bold;"
+                    text="Requirement Details"/>
+
+                <Separator/>
+
+                <!-- Common Requirement Properties -->
+                <VBox spacing="8.0">
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Label minWidth="120.0" text="Name"/>
+                        <TextField
+                            id="requirement-name-field"
+                            fx:id="requirementNameField"
+                            promptText="Enter requirement name"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox alignment="CENTER_LEFT" spacing="12.0">
+                        <Label minWidth="120.0" text="Requirement Type"/>
+                        <ComboBox
+                            id="requirement-type-combobox"
+                            fx:id="requirementTypeComboBox"
+                            maxWidth="Infinity"
+                            promptText="Select a requirement type"
+                            onAction="#handleRequirementTypeChanged"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+                </VBox>
+
+                <Separator/>
+
+                <Label
+                    style="-fx-font-weight: bold;"
+                    text="Requirement Parameters"/>
+
+                <!-- The controller displays the rows relevant to the selected subtype. -->
+                <VBox spacing="10.0">
+
+                    <!-- ArmouryPointsLimitReq: int limit -->
+                    <HBox
+                        fx:id="limitRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Points Limit"/>
+                        <TextField
+                            id="requirement-limit-field"
+                            fx:id="limitField"
+                            promptText="Enter points limit"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- CannotHaveGearReq: WargearDescription blockingGear -->
+                    <HBox
+                        fx:id="blockingGearRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Blocking Gear"/>
+                        <ComboBox
+                            id="blocking-gear-combobox"
+                            fx:id="blockingGearComboBox"
+                            maxWidth="Infinity"
+                            promptText="Select blocking gear"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- MaxPerModelCountReq: int rate, ModelDescription model -->
+                    <HBox
+                        fx:id="rateRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Rate"/>
+                        <TextField
+                            id="requirement-rate-field"
+                            fx:id="rateField"
+                            promptText="Enter rate"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <HBox
+                        fx:id="modelRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Model"/>
+                        <ComboBox
+                            id="requirement-model-combobox"
+                            fx:id="modelComboBox"
+                            maxWidth="Infinity"
+                            promptText="Select a model"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- MaxSelectionReq: int maxSelection -->
+                    <HBox
+                        fx:id="maxSelectionRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Maximum Selection"/>
+                        <TextField
+                            id="requirement-max-selection-field"
+                            fx:id="maxSelectionField"
+                            promptText="Enter maximum selection"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- ModelCountReq: int minimum, int maximum -->
+                    <HBox
+                        fx:id="modelCountRow"
+                        alignment="CENTER_LEFT"
+                        spacing="8.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Model Count"/>
+                        <TextField
+                            id="requirement-minimum-field"
+                            fx:id="minimumField"
+                            promptText="Minimum"
+                            HBox.hgrow="ALWAYS"/>
+                        <TextField
+                            id="requirement-maximum-field"
+                            fx:id="maximumField"
+                            promptText="Maximum"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- MustHaveGearReq / MustStartWithGearReq: WargearDescription requiredGear -->
+                    <HBox
+                        fx:id="requiredGearRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Required Gear"/>
+                        <ComboBox
+                            id="required-gear-combobox"
+                            fx:id="requiredGearComboBox"
+                            maxWidth="Infinity"
+                            promptText="Select required gear"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                    <!-- MustHaveTypeReq: UnitType requiredType -->
+                    <HBox
+                        fx:id="requiredTypeRow"
+                        alignment="CENTER_LEFT"
+                        spacing="12.0"
+                        visible="false"
+                        managed="false">
+                        <Label minWidth="120.0" text="Required Unit Type"/>
+                        <ComboBox
+                            id="required-type-combobox"
+                            fx:id="requiredTypeComboBox"
+                            maxWidth="Infinity"
+                            promptText="Select a unit type"
+                            HBox.hgrow="ALWAYS"/>
+                    </HBox>
+
+                </VBox>
+
+                <Label
+                    id="requirement-error-label"
+                    fx:id="errorLabel"
+                    textFill="FIREBRICK"
+                    wrapText="true"/>
+
+                <Region VBox.vgrow="ALWAYS"/>
+
+                <HBox spacing="8.0">
+                    <Button
+                        id="new-requirement-button"
+                        fx:id="newRequirementButton"
+                        onAction="#handleNew"
+                        text="New"/>
+
+                    <Button
+                        id="save-requirement-button"
+                        fx:id="saveRequirementButton"
+                        defaultButton="true"
+                        onAction="#handleSave"
+                        text="Save Requirement"/>
+
+                    <Button
+                        id="delete-requirement-button"
+                        fx:id="deleteRequirementButton"
+                        onAction="#handleDelete"
+                        text="Delete"/>
+                </HBox>
+
+            </VBox>
+        </items>
+    </SplitPane>
+</VBox>

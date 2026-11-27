@@ -2,11 +2,13 @@ package codexbuilder.repository;
 
 import java.util.List;
 
+import org.hibernate.Hibernate;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
-import org.hibernate.Session;
 
-import codexbuilder.model.AbstractStatLine;
+import codexbuilder.model.ModelDescription;
+import codexbuilder.model.WargearDescription;
 import codexbuilder.model.requirements.AbstractRequirement;
 
 public class RequirementRepository {
@@ -24,10 +26,14 @@ public class RequirementRepository {
      */
     public List<AbstractRequirement> findAll(){
     	try (Session session = sessionFactory.openSession()) {
-    		 return session.createQuery(
+    		List<AbstractRequirement> requirements = 
+    				session.createQuery(
                      "FROM AbstractRequirement",
                      AbstractRequirement.class
-             ).list();
+             ).getResultList();
+    		 
+    		 requirements.forEach(this::initializeWargear);
+    		 return requirements;
     	}
     }
     
@@ -38,8 +44,21 @@ public class RequirementRepository {
      * @return		the Requirement matching the provided ID
      */
     public AbstractRequirement findById(Long id) {
-    	try (Session session = sessionFactory.openSession()) {
-            return session.find(AbstractRequirement.class, id);
+
+        if (id == null) {
+            return null;
+        }
+
+        try (Session session = sessionFactory.openSession()) {
+
+            AbstractRequirement req =
+                session.find(AbstractRequirement.class, id);
+            
+            if (req != null) {
+            	initializeWargear(req);
+            }
+           
+            return req;
         }
     }
     
@@ -51,11 +70,15 @@ public class RequirementRepository {
      */
     public AbstractRequirement save(AbstractRequirement req) {
     	Transaction transaction = null;
+    	
     	try(Session session = sessionFactory.openSession()){
     		transaction = session.beginTransaction();
     		
     		AbstractRequirement savedReq = session.merge(req);
+    		initializeWargear(savedReq);
+    		
     		transaction.commit();
+    		
     		return savedReq;
     		
     	} catch (RuntimeException e) {
@@ -76,8 +99,12 @@ public class RequirementRepository {
     	
     	try (Session session = sessionFactory.openSession()){
     		transaction = session.beginTransaction();
-    		AbstractRequirement toDelete = session.merge(req);
-    		session.remove(toDelete);
+    		AbstractRequirement toDelete =
+    			    session.find(AbstractRequirement.class, req.getId());
+
+    			if (toDelete != null) {
+    			    session.remove(toDelete);
+    			}
     		transaction.commit();
     		
     	} catch (RuntimeException e) {
@@ -89,5 +116,24 @@ public class RequirementRepository {
     	}
     }
     
+    private void initializeWargear(AbstractRequirement req) {
+
+        if (req == null) {
+            return;
+        }
+
+        if (req.getBlockingGear() != null) {
+            Hibernate.initialize(req.getBlockingGear());
+        }
+
+        if (req.getRequiredGear() != null) {
+            Hibernate.initialize(req.getRequiredGear());
+        }
+
+//        ModelDescription model = req.getModel();
+//        if (model != null) {
+//            Hibernate.initialize(model);
+//        }
+    }
     
 }

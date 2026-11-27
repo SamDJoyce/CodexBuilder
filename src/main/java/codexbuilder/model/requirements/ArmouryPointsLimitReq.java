@@ -12,7 +12,7 @@ import jakarta.persistence.Entity;
 public class ArmouryPointsLimitReq extends AbstractRequirement{
 	@Column(nullable = false)
 	private String name;
-	@Column
+	@Column(name = "points_limit")
 	private int limit;
 	
 	private String type = "armoury_points_limit";
@@ -37,6 +37,11 @@ public class ArmouryPointsLimitReq extends AbstractRequirement{
 	@Override
 	public int getLimit() {
 		return limit;
+	}
+	
+	@Override
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	@Override
@@ -88,12 +93,6 @@ public class ArmouryPointsLimitReq extends AbstractRequirement{
 
 	@Override
 	public void setMaximum(int maximum) {
-		// Unused
-		
-	}
-
-	@Override
-	public void setLimit(int limit) {
 		// Unused
 		
 	}
