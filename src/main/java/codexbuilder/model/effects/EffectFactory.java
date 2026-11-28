@@ -8,6 +8,34 @@ import codexbuilder.model.WargearDescription;
  * 
  */
 public class EffectFactory {
+	
+	public static AbstractEffect create(String type) {
+		switch (type.toLowerCase()) {
+    	case "add_gear_to_squad":
+    		return new AddGearToSquadEffect();
+    	case "add_model":
+    		return new AddModelEffect();
+    	case "add_model_type":
+    		return new AddModelTypeEffect();
+    	case "add_wargear":
+    		return new AddWargearEffect();
+    	case "change_model_name":
+    		return new ChangeModelNameEffect();
+    	case "modify_stat":
+    		return new ModifyStatEffect();
+    	case "remove_wargear":
+    		return new RemoveWargearEffect();
+    	case "replace_model":
+    		return new ReplaceModelEffect();
+    	case "replace_wargear":
+    		return new ReplaceWargearEffect();
+    	 default:
+             throw new IllegalArgumentException(
+                     "Effect type unsupported by factory: " + type
+             );
+	}
+	}
+	
 	/**
 	 * Construct an AddModelEffect object
 	 */

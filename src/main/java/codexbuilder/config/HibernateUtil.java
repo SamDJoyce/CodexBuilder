@@ -7,6 +7,15 @@ import codexbuilder.model.StatLineInfantry;
 import codexbuilder.model.StatLineVehicle;
 import codexbuilder.model.StatLineWalker;
 import codexbuilder.model.WargearDescription;
+import codexbuilder.model.effects.AddGearToSquadEffect;
+import codexbuilder.model.effects.AddModelEffect;
+import codexbuilder.model.effects.AddModelTypeEffect;
+import codexbuilder.model.effects.AddWargearEffect;
+import codexbuilder.model.effects.ChangeModelNameEffect;
+import codexbuilder.model.effects.ModifyStatEffect;
+import codexbuilder.model.effects.RemoveWargearEffect;
+import codexbuilder.model.effects.ReplaceModelEffect;
+import codexbuilder.model.effects.ReplaceWargearEffect;
 import codexbuilder.model.requirements.ArmouryPointsLimitReq;
 import codexbuilder.model.requirements.ArmouryWeaponLimitReq;
 import codexbuilder.model.requirements.CannotHaveGearReq;
@@ -44,6 +53,15 @@ public class HibernateUtil {
                 .addAnnotatedClass(MustHaveTypeReq.class)
                 .addAnnotatedClass(MustStartWithGearReq.class)
                 // Effects
+                .addAnnotatedClass(AddGearToSquadEffect.class)
+                .addAnnotatedClass(AddModelEffect.class)
+                .addAnnotatedClass(AddModelTypeEffect.class)
+                .addAnnotatedClass(AddWargearEffect.class)
+                .addAnnotatedClass(ChangeModelNameEffect.class)
+                .addAnnotatedClass(ModifyStatEffect.class)
+                .addAnnotatedClass(RemoveWargearEffect.class)
+                .addAnnotatedClass(ReplaceModelEffect.class)
+                .addAnnotatedClass(ReplaceWargearEffect.class)
                 
                 .buildSessionFactory();
 
